@@ -1,0 +1,75 @@
+{
+  "name": "css-specificity-cli",
+  "version": "0.1.0",
+  "description": "Print a specificity heat map for any CSS file — spot the over-specific selectors before they become a refactor.",
+  "keywords": [
+    "css",
+    "specificity",
+    "heatmap",
+    "cli",
+    "stylesheet",
+    "selectors",
+    "css-quality",
+    "lint",
+    "refactor",
+    "budget"
+  ],
+  "author": "kea0811",
+  "license": "MIT",
+  "homepage": "https://css-specificity-cli.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kea0811/css-specificity-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kea0811/css-specificity-cli/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "bin": {
+    "css-specificity": "./dist/bin.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "SKILL.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "postcss": "^8.4.47"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "@vitest/coverage-v8": "^2.1.2",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@10.28.1",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}
