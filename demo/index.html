@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>css-specificity — a specificity heat map for any CSS file</title>
+    <title>css-specificity — a specificity heat map for any CSS file, project, or URL</title>
     <meta
       name="description"
-      content="A tiny CLI that prints a color-coded specificity heat map for any CSS file. The over-specific selectors light up red, and a --threshold flag fails CI when specificity creeps up."
+      content="A tiny CLI that prints a color-coded specificity heat map for a CSS file, a whole project directory, or a live URL. The over-specific selectors light up red, and a --threshold flag fails CI when specificity creeps up."
     />
     <meta name="color-scheme" content="dark" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -443,10 +443,11 @@
     <div class="wrap">
       <header>
         <span class="kicker">css-specificity</span>
-        <h1>A <span class="grad">specificity heat map</span> for any CSS file</h1>
+        <h1>A <span class="grad">specificity heat map</span> for any CSS file, project, or URL</h1>
         <p class="lede">
-          Specificity is invisible until something breaks. This CLI makes it legible — every selector,
-          scored and color-coded, with the over-specific offenders glowing red.
+          Specificity is invisible until something breaks. This CLI makes it legible — point it at a
+          file, a whole project, or a live URL and every selector is scored and color-coded, with the
+          over-specific offenders glowing red.
         </p>
         <div class="cta">
           <code class="install-inline"><span class="prompt">$</span> pnpm add -g css-specificity-cli</code>
@@ -501,11 +502,12 @@
             </p>
           </article>
           <article class="card">
-            <span class="icon" aria-hidden="true">{ }</span>
-            <h3>Pipe-friendly JSON</h3>
+            <span class="icon" aria-hidden="true">→ ⌘</span>
+            <h3>File, project, or URL</h3>
             <p>
-              <code>--json</code> emits the full report for <code>jq</code>, build artifacts, or
-              diffing two runs to watch specificity drift over time.
+              Point it at one <code>.css</code> file, a whole project directory, or a live
+              <code>https://</code> URL — it pulls in every linked and inline stylesheet and reports
+              on all of them together.
             </p>
           </article>
         </section>
@@ -525,6 +527,16 @@
             <h4>Audit a stylesheet</h4>
             <p>Print the full heat map, hottest selectors first.</p>
             <div class="block"><pre><span class="prompt">$</span> css-specificity styles.css</pre></div>
+          </div>
+          <div class="use">
+            <h4>Scan a whole project</h4>
+            <p>Walk a directory and report on every <code>.css</code> file at once.</p>
+            <div class="block"><pre><span class="prompt">$</span> css-specificity ./src</pre></div>
+          </div>
+          <div class="use">
+            <h4>Analyze a live URL</h4>
+            <p>Fetch a page and score every stylesheet it loads. Add <code>--browser</code> to capture runtime CSS-in-JS.</p>
+            <div class="block"><pre><span class="prompt">$</span> css-specificity https://example.com</pre></div>
           </div>
           <div class="use">
             <h4>Gate it in CI</h4>
