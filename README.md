@@ -152,6 +152,7 @@ cat styles.css | css-specificity -
 | `-t, --top <n>` | Show only the N most specific selectors. |
 | `-s, --sort <order>` | `spec` (most specific first, default) or `source` (file order). |
 | `--threshold <a,b,c>` | Budget gate: exit `1` if any selector exceeds it, e.g. `0,3,0`. |
+| `--browser` | For a URL, render the page in headless Chromium to capture runtime CSS (needs the optional `playwright` dependency). |
 | `--no-color` | Disable ANSI colors (also respects the `NO_COLOR` env var). |
 | `-v, --version` | Print the version. |
 | `-h, --help` | Show usage and examples. |
