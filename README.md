@@ -28,10 +28,12 @@ Requires Node 18+.
 
 ## Quick start
 
-Point it at a stylesheet:
+Point it at a stylesheet, a whole project, or a live URL:
 
 ```bash
-css-specificity styles.css
+css-specificity styles.css            # one file
+css-specificity ./src                 # every .css file in a project
+css-specificity https://example.com   # all CSS the page links or embeds
 ```
 
 ```text
@@ -50,6 +52,41 @@ styles.css — 8 selectors
 ```
 
 Each row is one selector: a heat glyph (`█ ▓ ▒ ░ ·`, hot → cool), its `(a, b, c)` specificity, the selector itself, and the source line. Selectors are sorted most-specific-first by default, so the things most likely to bite you are at the top.
+
+### Scan a whole project or a live page
+
+Give it a **directory** and it walks the tree, scanning every `.css` file (skipping `node_modules` and dotfolders) into one report — each selector tagged with the file it came from:
+
+```bash
+css-specificity ./src
+```
+
+```text
+./src — 2 selectors across 2 sources
+
+  █  1,0,0  #x     src/a.css:L1
+  ▓  0,2,0  .y .z  src/sub/b.css:L1
+```
+
+Give it an **`http(s)` URL** and it fetches the page, then pulls in every `<link rel="stylesheet">` and inline `<style>` block — each treated as its own source:
+
+```bash
+css-specificity https://example.com
+```
+
+That static fetch captures everything a server-rendered or static site ships. For apps that inject CSS at runtime (CSS-in-JS, styled-components, many React SPAs), add `--browser` to render the page in headless Chromium and read every stylesheet the live DOM actually applies:
+
+```bash
+css-specificity https://example.com --browser
+```
+
+`--browser` needs the optional [`playwright`](https://playwright.dev) dependency:
+
+```bash
+npm i -D playwright && npx playwright install chromium
+```
+
+> Reading from a directory or URL produces a **multi-source report**: selectors from every stylesheet are merged, sorted, and budget-checked together, with each row showing its origin. `--json` adds a `sources` count and a `source` field per selector.
 
 ### What the triple means
 

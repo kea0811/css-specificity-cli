@@ -53,21 +53,23 @@ function paintHeat(level: number, text: string, colors: Colors): string {
   }
 }
 
-const toJsonEntry = (entry: SelectorEntry) => ({
-  selector: entry.selector,
-  specificity: entry.specificity,
-  line: entry.line,
-});
+const toJsonEntry = (multi: boolean) => (entry: SelectorEntry) =>
+  multi
+    ? { selector: entry.selector, specificity: entry.specificity, line: entry.line, source: entry.source }
+    : { selector: entry.selector, specificity: entry.specificity, line: entry.line };
 
 function renderJson(report: Report): string {
+  const multi = (report.sourceCount ?? 1) > 1;
+  const entry = toJsonEntry(multi);
   return JSON.stringify(
     {
       file: report.file,
       total: report.total,
+      ...(multi ? { sources: report.sourceCount } : {}),
       max: report.max,
       threshold: report.threshold,
-      overBudget: report.overBudget.map(toJsonEntry),
-      selectors: report.shown.map(toJsonEntry),
+      overBudget: report.overBudget.map(entry),
+      selectors: report.shown.map(entry),
     },
     null,
     2,
@@ -81,10 +83,14 @@ function renderHeatmap(report: Report, colors: Colors): string {
     return colors.dim(`${file}: no selectors found`);
   }
 
+  const sourceCount = report.sourceCount ?? 1;
+  const multi = sourceCount > 1;
+
   const lines: string[] = [];
   const shownNote = shown.length < total ? ` (showing top ${shown.length})` : '';
   const plural = total === 1 ? '' : 's';
-  lines.push(`${colors.bold(file)} ${colors.dim(`— ${total} selector${plural}${shownNote}`)}`);
+  const across = multi ? ` across ${sourceCount} sources` : '';
+  lines.push(`${colors.bold(file)} ${colors.dim(`— ${total} selector${plural}${across}${shownNote}`)}`);
   lines.push('');
 
   const specWidth = Math.max(...shown.map((entry) => formatSpecificity(entry.specificity).length));
@@ -94,7 +100,8 @@ function renderHeatmap(report: Report, colors: Colors): string {
     const specText = paintHeat(level, formatSpecificity(entry.specificity).padStart(specWidth), colors);
     const over = threshold !== null && compareSpecificity(entry.specificity, threshold) > 0;
     const selectorText = over ? colors.red(entry.selector) : entry.selector;
-    lines.push(`  ${glyph}  ${specText}  ${selectorText}  ${colors.dim(`L${entry.line}`)}`);
+    const locus = multi ? `${entry.source}:L${entry.line}` : `L${entry.line}`;
+    lines.push(`  ${glyph}  ${specText}  ${selectorText}  ${colors.dim(locus)}`);
   }
 
   lines.push('');

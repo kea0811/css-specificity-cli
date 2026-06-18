@@ -18,6 +18,8 @@ export interface SelectorEntry {
   specificity: Specificity;
   /** The 1-based source line the rule started on. */
   line: number;
+  /** The stylesheet this selector came from, set only when scanning many. */
+  source?: string;
 }
 
 /** The data a renderer needs to print a heat map (or its JSON equivalent). */
@@ -34,4 +36,6 @@ export interface Report {
   threshold: Specificity | null;
   /** Every selector whose specificity is strictly over the threshold. */
   overBudget: SelectorEntry[];
+  /** How many stylesheets were scanned. Omitted (treated as 1) for a single source. */
+  sourceCount?: number;
 }

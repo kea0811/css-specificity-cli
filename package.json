@@ -1,7 +1,7 @@
 {
   "name": "css-specificity-cli",
-  "version": "0.1.0",
-  "description": "Print a specificity heat map for any CSS file — spot the over-specific selectors before they become a refactor.",
+  "version": "0.2.0",
+  "description": "Print a specificity heat map for any CSS file, directory, or live URL — spot the over-specific selectors before they become a refactor.",
   "keywords": [
     "css",
     "specificity",
@@ -55,6 +55,9 @@
   "dependencies": {
     "commander": "^12.1.0",
     "postcss": "^8.4.47"
+  },
+  "optionalDependencies": {
+    "playwright": "^1.48.0"
   },
   "devDependencies": {
     "@types/node": "^22.7.5",

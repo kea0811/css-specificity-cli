@@ -6,6 +6,8 @@ export default defineConfig({
     bin: 'src/bin.ts',
   },
   format: ['esm', 'cjs'],
+  // Optional dependency: resolved at runtime only when --browser is used.
+  external: ['playwright'],
   dts: { entry: 'src/index.ts' },
   clean: true,
   splitting: false,
