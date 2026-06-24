@@ -1,6 +1,6 @@
 {
   "name": "css-specificity-cli",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Print a specificity heat map for any CSS file, directory, or live URL — spot the over-specific selectors before they become a refactor.",
   "keywords": [
     "css",
