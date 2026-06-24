@@ -4,7 +4,7 @@
 ![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)
 ![license](https://img.shields.io/badge/license-MIT-blue.svg)
 
-**🌐 [Live demo →](https://css-specificity-cli.vercel.app)**
+**🌐 [Live demo →](https://css-specificity-cli-omega.vercel.app)**
 
 > Print a specificity heat map for any CSS file — the over-specific selectors light up red so you can see the refactor before you start it.
 
@@ -182,7 +182,7 @@ Parsing the file itself is delegated to [PostCSS](https://postcss.org), so real-
 
 ## Live demo
 
-See it in action at **[css-specificity-cli.vercel.app](https://css-specificity-cli.vercel.app)** — a static page with a sample run.
+See it in action at **[css-specificity-cli-omega.vercel.app](https://css-specificity-cli-omega.vercel.app)** — a static page with a sample run.
 
 ## Contributing
 

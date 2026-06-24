@@ -103,5 +103,5 @@ parseSelectors('.a {} #b div {}');         // [{ selector, specificity, line }, 
 ## Links
 
 - npm: https://www.npmjs.com/package/css-specificity-cli
-- landing: https://css-specificity-cli.vercel.app
+- landing: https://css-specificity-cli-omega.vercel.app
 - repo: https://github.com/kea0811/css-specificity-cli
